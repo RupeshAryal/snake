@@ -4,6 +4,7 @@ from snake import Snake
 from food import Food
 from scoreboard import ScoreBoard
 
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -15,6 +16,8 @@ food = Food()
 screen.update()
 food.location()
 scoreboard = ScoreBoard()
+
+
 
 screen.listen()
 screen.onkey(key="Up", fun=rupesh.move_up)
@@ -34,12 +37,15 @@ while game_on:
     if abs(rupesh.head.xcor()) > 290 or abs(rupesh.head.ycor()) > 290:
         game_on = False
         scoreboard.game_over()
-    for segment in rupesh.segments:
-        if segment == rupesh.head:
-            pass
-        elif segment.distance(rupesh.head) < 10:
+        scoreboard.update_highscore()
+    for segment in rupesh.segments[1:]:
+
+        if segment.distance(rupesh.head) < 10:
             game_on = False
             scoreboard.game_over()
+            scoreboard.update_highscore()
+
+
 
 
 
